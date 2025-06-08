@@ -24,10 +24,7 @@ export default function () {
         <button
           className="btn btn-primary"
           onClick={() =>
-            window.open(
-              'https://farcaster.xyz/stupidinternetmoneyprotocol',
-              '_blank'
-            )
+            window.open('https://farcaster.xyz/simpdotcom', '_blank')
           }
         >
           Farcaster
