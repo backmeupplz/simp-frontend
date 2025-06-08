@@ -19,7 +19,7 @@ export default function () {
         airdrops. 10% contingency fund locked behind 2/5 multisig between
         <code>borodutch.eth</code>, <code>vitalik.eth</code>,{' '}
         <code>jessepollak.eth</code>, <code>dwr.eth</code>, and{' '}
-        <code>varunsrin.eth</code>.
+        <code>varunsrin.eth</code>. The rest goes into the liquidity pool.
       </p>
       <p>
         Airdrop will be proportional to: $SIMP holding, number of Farcaster and
