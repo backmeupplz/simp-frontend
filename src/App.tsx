@@ -10,9 +10,39 @@ export default function () {
         ca: <code className="break-all">0x0</code>
       </p>
       <div className="flex flex-row gap-2 flex-wrap items-center justify-center">
-        <button className="btn btn-primary">Dex</button>
-        <button className="btn btn-primary">Farcaster</button>
-        <button className="btn btn-primary">Exp</button>
+        <button
+          className="btn btn-primary"
+          onClick={() =>
+            window.open(
+              'https://dexscreener.com/base/0x568664cb237D2a730e9B8C11850Ec62B633C5C45',
+              '_blank'
+            )
+          }
+        >
+          Dex
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() =>
+            window.open(
+              'https://farcaster.xyz/stupidinternetmoneyprotocol',
+              '_blank'
+            )
+          }
+        >
+          Farcaster
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() =>
+            window.open(
+              'https://basescan.org/address/0x568664cb237D2a730e9B8C11850Ec62B633C5C45',
+              '_blank'
+            )
+          }
+        >
+          Exp
+        </button>
       </div>
       <p>
         Only 69,420,000 $SIMP will ever exist. 3% to the team. 17% to the
