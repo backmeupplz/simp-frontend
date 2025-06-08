@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @plugin "daisyui" {
-  themes: caramellatte --default;
+  themes: forest --default;
 }
 @plugin "@tailwindcss/typography";
 
