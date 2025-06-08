@@ -7,7 +7,10 @@ export default function () {
         The larger the stake, <b>the more it rewards</b>
       </h3>
       <p>
-        ca: <code className="break-all">0x0</code>
+        ca:{' '}
+        <code className="break-all">
+          0x568664cb237D2a730e9B8C11850Ec62B633C5C45
+        </code>
       </p>
       <div className="flex flex-row gap-2 flex-wrap items-center justify-center">
         <button
