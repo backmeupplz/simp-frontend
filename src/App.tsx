@@ -46,10 +46,9 @@ export default function () {
       </div>
       <p>
         Only 69,420,000 $SIMP will ever exist. 3% to the team. 17% to the
-        airdrops. 10% contingency fund locked behind 2/5 multisig between
-        <code>borodutch.eth</code>, <code>vitalik.eth</code>,{' '}
-        <code>jessepollak.eth</code>, <code>dwr.eth</code>, and{' '}
-        <code>varunsrin.eth</code>. The rest goes into the liquidity pool.
+        airdrops. 10% contingency fund locked behind 2/3 multisig between
+        <code>borodutch.eth</code>, <code>vitalik.eth</code>, and{' '}
+        <code>jessepollak.eth</code>. The rest goes into the liquidity pool.
       </p>
       <p>
         Airdrop will be proportional to: $SIMP holding, number of Farcaster and
