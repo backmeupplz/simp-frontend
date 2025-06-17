@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjEzNTYsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgyYjA5NDUwQ0MxODAxOWQyYzUwNWJCY0VDYjI3NDg1RTA0NjlCQzJjIn0",
+    "payload": "eyJkb21haW4iOiJzdHVwaWRpbnRlcm5ldG1vbmV5cHJvdG9jb2wuY29tIn0",
+    "signature": "MHg3YjVkNjdjNGJjZGVjNTEwYWY0ZDI5OTc4OTQ3MmMyZTUzZmE0NWM4Y2VkNTNjYWJjMThhMDIxYmM5N2QxMGI3NDFjM2Q3NDhmNTJlOTJlNDFhYmQyNzUxMzBiNzJkNjNmM2U0MjBmYmNjYmMxMGRjZGE1ZmFmZTJjNGI3NzYwMTFj"
+  },
+  "frame": {
+    "version": "1",
+    "name": "$SIMP",
+    "iconUrl": "https://stupidinternetmoneyprotocol.com/icon.png",
+    "homeUrl": "https://stupidinternetmoneyprotocol.com",
+    "imageUrl": "https://stupidinternetmoneyprotocol.com/image.png",
+    "buttonTitle": "Launch $SIMP!",
+    "splashImageUrl": "https://stupidinternetmoneyprotocol.com/splash.png",
+    "splashBackgroundColor": "#000000",
+    "webhookUrl": "https://backend.stupidinternetmoneyprotocol.com/farcaster-webhook"
+  }
+}
