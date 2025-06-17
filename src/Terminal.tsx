@@ -1,3 +1,5 @@
+import { MiniAppContext } from 'MiniAppContext'
+import { useContext } from 'preact/hooks'
 import { Command, Terminal } from 'react-terminal-emulator-ui'
 
 const initialFeed = `Welcome to StupidInternetMoneyProtocol ($SIMP)! The larger the stake, the more it rewards.
@@ -131,11 +133,14 @@ const commands: Array<Command> = [
 ]
 
 export default function () {
+  const { ready, context } = useContext(MiniAppContext)
   return (
     <div className="flex h-screen w-screen p-2 bg-black">
       <Terminal
         commands={commands}
-        userName="anon"
+        userName={
+          ready && context?.user.username ? context.user.username : 'anon'
+        }
         machineName="simp"
         initialFeed={initialFeed}
       />

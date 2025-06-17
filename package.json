@@ -12,6 +12,7 @@
     "start-server": "node server.cjs"
   },
   "dependencies": {
+    "@farcaster/frame-sdk": "^0.0.64",
     "jotai": "^2.12.5",
     "preact": "^10.26.8",
     "react-terminal-emulator-ui": "^1.2.0"
