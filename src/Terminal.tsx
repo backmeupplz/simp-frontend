@@ -1,7 +1,7 @@
 import miniAppSdk from '@farcaster/frame-sdk'
 import { MiniAppContext } from 'MiniAppContext'
 import { useContext, useMemo } from 'preact/hooks'
-import { Terminal } from 'react-terminal-emulator-ui'
+import { Terminal } from 'TerminalComponent'
 
 const initialFeed = `Welcome to StupidInternetMoneyProtocol ($SIMP)! The larger the stake, the more it rewards.
 
@@ -201,7 +201,7 @@ export default function () {
     [ready, context]
   )
   return (
-    <div className="flex h-screen w-screen p-2 bg-black">
+    <div className="flex h-screen w-screen p-2 bg-black break-words">
       <Terminal
         commands={commands}
         userName={
