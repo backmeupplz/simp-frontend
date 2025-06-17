@@ -56,26 +56,73 @@ export default function () {
               <li>
                 <a
                   className="underline"
-                  href="https://dexscreener.com/base/0x568664cb237D2a730e9B8C11850Ec62B633C5C45"
+                  href={
+                    !ready && !context
+                      ? 'https://dexscreener.com/base/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
+                      : undefined
+                  }
+                  onClick={() => {
+                    if (ready && context) {
+                      return miniAppSdk.actions.openUrl(
+                        'https://dexscreener.com/base/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
+                      )
+                    }
+                  }}
                 >
                   Dex
                 </a>
                 ,{' '}
                 <a
                   className="underline"
-                  href="https://basescan.org/address/0x568664cb237D2a730e9B8C11850Ec62B633C5C45"
+                  href={
+                    !ready && !context
+                      ? 'https://basescan.org/address/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
+                      : undefined
+                  }
+                  onClick={() => {
+                    if (ready && context) {
+                      return miniAppSdk.actions.openUrl(
+                        'https://basescan.org/address/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
+                      )
+                    }
+                  }}
                 >
                   Exp
                 </a>
                 ,{' '}
                 <a
                   className="underline"
-                  href="https://farcaster.xyz/simpdotcom"
+                  href={
+                    !ready && !context
+                      ? 'https://farcaster.xyz/simpdotcom'
+                      : undefined
+                  }
+                  onClick={() => {
+                    if (ready && context) {
+                      return miniAppSdk.actions.openUrl(
+                        'https://farcaster.xyz/simpdotcom'
+                      )
+                    }
+                  }}
                 >
                   Farcaster
                 </a>
                 ,{' '}
-                <a className="underline" href="https://x.com/sinternetmoneyp/">
+                <a
+                  className="underline"
+                  href={
+                    !ready && !context
+                      ? 'https://x.com/sinternetmoneyp/'
+                      : undefined
+                  }
+                  onClick={() => {
+                    if (ready && context) {
+                      return miniAppSdk.actions.openUrl(
+                        'https://x.com/sinternetmoneyp/'
+                      )
+                    }
+                  }}
+                >
                   X
                 </a>
               </li>
