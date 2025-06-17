@@ -7,11 +7,11 @@
   "frame": {
     "version": "1",
     "name": "$SIMP",
-    "iconUrl": "https://stupidinternetmoneyprotocol.com/icon.png",
+    "iconUrl": "https://stupidinternetmoneyprotocol.com/frames/logo.png",
     "homeUrl": "https://stupidinternetmoneyprotocol.com",
-    "imageUrl": "https://stupidinternetmoneyprotocol.com/image.png",
+    "imageUrl": "https://stupidinternetmoneyprotocol.com/frames/image-url.png",
     "buttonTitle": "Launch $SIMP!",
-    "splashImageUrl": "https://stupidinternetmoneyprotocol.com/splash.png",
+    "splashImageUrl": "https://stupidinternetmoneyprotocol.com/frames/frames/splash.png",
     "splashBackgroundColor": "#000000",
     "webhookUrl": "https://backend.stupidinternetmoneyprotocol.com/farcaster-webhook"
   }
