@@ -84,18 +84,11 @@ const getPrompt = (line: React.ReactNode, index: number): React.ReactNode => {
     const machineNameOnly = machineName.slice(0, -3)
     return (
       <div className="flex" key={index}>
-        <span className="dark:text-green-500/80 text-green-800 font-bold">
-          {userName}
-        </span>
-        <span className="dark:text-gray-300 text-gray-700">@</span>
-        <span className="dark:text-blue-500/80 text-blue-800 font-bold">
-          {machineNameOnly}
-        </span>
-        :
-        <span className="dark:text-yellow-500/80 text-orange-800 font-bold">
-          ~
-        </span>
-        <span className="dark:text-red-500/80 text-red-800 font-bold">$</span>
+        <span className="text-green-500/80 font-bold">{userName}</span>
+        <span className="text-gray-300">@</span>
+        <span className="text-blue-500/80 font-bold">{machineNameOnly}</span>:
+        <span className="text-yellow-500/80 font-bold">~</span>
+        <span className="text-red-500/80 font-bold">$</span>
         &nbsp;
         <span className="break-all">{command}</span>
       </div>
@@ -212,18 +205,18 @@ export const Terminal = ({
 
   return (
     <div
-      className="flex flex-col text-black dark:text-white bg-[#afafaf96] dark:bg-[#300924] rounded-md w-full h-full font-mono"
+      className="flex flex-col text-white bg-[#300924] rounded-md w-full h-full font-mono"
       onFocus={handleFocusInput}
       onBlur={handleBlur}
       tabIndex={1}
     >
-      <div className="flex p-2 dark:bg-gray-700 bg-slate-600 rounded-tl-md rounded-tr-md h-10 items-center">
+      <div className="flex p-2 bg-gray-700  rounded-tl-md rounded-tr-md h-10 items-center">
         <div className="flex space-x-2 items-center">
           <div className="w-3 h-3 bg-red-500 rounded-full"></div>
           <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
           <div className="w-3 h-3 bg-green-500 rounded-full"></div>
         </div>
-        <div className="text-center w-full font-bold text-slate-400 dark:text-gray-300 -ml-9">
+        <div className="text-center w-full font-bold text-gray-300 -ml-9">
           [{trimmedUserName}@{trimmedMachineName}]$
         </div>
       </div>
@@ -232,21 +225,16 @@ export const Terminal = ({
         {output.map(getPrompt)}
         <div className="flex relative">
           <span>
-            <span className="dark:text-green-500/80 text-green-800 font-bold ">
+            <span className="text-green-500/80 font-bold ">
               {trimmedUserName}
             </span>
-            <span className="dark:text-gray-300 text-gray-700 font-bold">
-              @
-            </span>
-            <span className="dark:text-blue-500/80 text-blue-800 font-bold">
+            <span className="text-gray-300 font-bold">@</span>
+            <span className="text-blue-500/80 font-bold">
               {trimmedMachineName}
             </span>
           </span>
-          :
-          <span className="dark:text-yellow-500/80 text-orange-800 font-bold">
-            ~
-          </span>
-          <span className="dark:text-red-500/80 text-red-800 font-bold">$</span>
+          :<span className="text-yellow-500/80 font-bold">~</span>
+          <span className="text-red-500/80 font-bold">$</span>
           &nbsp;
           <div className="flex-grow relative">
             <span
@@ -271,7 +259,7 @@ export const Terminal = ({
               {focused ? (
                 <div
                   ref={caretRef}
-                  className="absolute top-0 h-full bg-slate-800 dark:bg-white w-[10px] animate-caret-blink"
+                  className="absolute top-0 h-full bg-white w-[10px] animate-caret-blink"
                 />
               ) : null}
             </div>
