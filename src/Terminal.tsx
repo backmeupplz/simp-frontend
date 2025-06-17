@@ -55,9 +55,10 @@ export default function () {
               </li>
               <li>
                 <a
+                  target="_blank"
                   className="underline"
                   href={
-                    !ready && !context
+                    ready && !context
                       ? 'https://dexscreener.com/base/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
                       : undefined
                   }
@@ -73,9 +74,10 @@ export default function () {
                 </a>
                 ,{' '}
                 <a
+                  target="_blank"
                   className="underline"
                   href={
-                    !ready && !context
+                    ready && !context
                       ? 'https://basescan.org/address/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
                       : undefined
                   }
@@ -91,9 +93,10 @@ export default function () {
                 </a>
                 ,{' '}
                 <a
+                  target="_blank"
                   className="underline"
                   href={
-                    !ready && !context
+                    ready && !context
                       ? 'https://farcaster.xyz/simpdotcom'
                       : undefined
                   }
@@ -109,9 +112,10 @@ export default function () {
                 </a>
                 ,{' '}
                 <a
+                  target="_blank"
                   className="underline"
                   href={
-                    !ready && !context
+                    ready && !context
                       ? 'https://x.com/sinternetmoneyp/'
                       : undefined
                   }
@@ -175,6 +179,7 @@ export default function () {
               <p>
                 You can buy $SIMP on Uniswap{' '}
                 <a
+                  target="_blank"
                   className="underline"
                   href="https://app.uniswap.org/swap?outputCurrency=0x568664cb237D2a730e9B8C11850Ec62B633C5C45&chain=base"
                 >
