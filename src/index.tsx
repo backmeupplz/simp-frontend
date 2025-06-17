@@ -1,5 +1,5 @@
 import 'index.css'
 import { render } from 'preact'
-import App from 'App'
+import Terminal from 'Terminal'
 
-render(<App />, document.getElementById('root') as Element)
+render(<Terminal />, document.getElementById('root') as Element)

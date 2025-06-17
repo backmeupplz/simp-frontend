@@ -1,8 +1,6 @@
-@import 'tailwindcss';
-@plugin "daisyui" {
-  themes: forest --default;
-}
-@plugin "@tailwindcss/typography";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   margin: 0;
