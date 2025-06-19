@@ -12,6 +12,7 @@ interface Props {
   userName: string
   machineName: string
   initialFeed?: string
+  initialFeedEnding?: React.ReactNode
   onCommandNotFound?: (cmd: string) => string
   disableClearCommand?: boolean
 }
@@ -103,6 +104,7 @@ export const Terminal = ({
   machineName,
   userName,
   initialFeed = 'Welcome to your terminal. Type `help` to see available commands.',
+  initialFeedEnding,
   onCommandNotFound = (cmd: string) => `'${cmd}': command  not found.`,
   disableClearCommand,
 }: Props) => {
@@ -203,6 +205,8 @@ export const Terminal = ({
     setFocused(false)
   }
 
+  const [feedEndingVisible, setFeedEndingVisible] = useState(false)
+
   return (
     <div
       className="flex flex-col text-white bg-[#300924] rounded-md w-full h-full font-mono"
@@ -221,7 +225,19 @@ export const Terminal = ({
         </div>
       </div>
       <div className="overflow-y-auto pt-4 px-2" ref={wrapperRef}>
-        <TypeAnimation speed={90} cursor={false} sequence={[initialFeed]} />
+        <TypeAnimation
+          speed={90}
+          cursor={false}
+          sequence={[
+            initialFeed,
+            () => {
+              setFeedEndingVisible(true)
+            },
+          ]}
+        />
+        {feedEndingVisible && !!initialFeedEnding && (
+          <div className="flex">{initialFeedEnding}</div>
+        )}
         {output.map(getPrompt)}
         <div className="flex relative">
           <span>

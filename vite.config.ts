@@ -16,4 +16,7 @@ export default defineConfig({
     },
     outDir: 'dist',
   },
+  server: {
+    allowedHosts: ['empty-points-fail.loca.lt'],
+  },
 })

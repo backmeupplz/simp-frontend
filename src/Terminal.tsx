@@ -1,16 +1,21 @@
 import miniAppSdk from '@farcaster/frame-sdk'
+import { farcasterFrame } from '@farcaster/frame-wagmi-connector'
+import contractAddress from 'contractAddress'
+import InitialFeedEnding from 'InitialFeedEnding'
 import { MiniAppContext } from 'MiniAppContext'
 import { useContext, useMemo } from 'preact/hooks'
+import toast from 'react-hot-toast'
+import simpAbi from 'simpAbi'
 import { Terminal } from 'TerminalComponent'
+import { useAccount, useConnect, useWriteContract } from 'wagmi'
 
-const initialFeed = `Welcome to StupidInternetMoneyProtocol ($SIMP)! The larger the stake, the more it rewards.
-
-available commands: help, info, airdrop, buy, participate.
-
-when $SIMP launches, you will only need the "participate" command.`
+const initialFeed = `Welcome to StupidInternetMoneyProtocol ($SIMP)! The larger the stake, the more it rewards. The future and the past of crypto: many play, fewer get much more! Available commands: help, info, airdrop, buy, rules, participate.`
 
 export default function () {
   const { ready, context } = useContext(MiniAppContext)
+  const account = useAccount()
+  const { connectors, connectAsync } = useConnect()
+  const { writeContractAsync } = useWriteContract()
   const commands = useMemo(
     () => [
       {
@@ -32,7 +37,10 @@ export default function () {
                 <b>buy</b>: Buy $SIMP
               </li>
               <li>
-                <b>participate</b>: Participate in the $SIMP ecosystem
+                <b>rules</b>: Rules of the game
+              </li>
+              <li>
+                <b>participate</b>: Purchase a ticket with $SIMP
               </li>
             </ul>
           </div>
@@ -156,16 +164,92 @@ export default function () {
         ),
       },
       {
+        command: 'rules',
+        result: (
+          <div>
+            <p>
+              The rules are simple: you get tickets by sending the participate
+              command, then at random dates and random times the great random
+              decides 50 lucky people who split the pot. There is no need to
+              take any actions after you get the ticket, randomness is fully
+              automated.
+            </p>
+            <ul>
+              <li>
+                <b>Legendary Gem</b>: 1 winner, 29% of the pot
+              </li>
+              <li>
+                <b>Mythic Duo</b>: 2 winners, each gets 10% (20% total)
+              </li>
+              <li>
+                <b>Rare Relics</b>: 5 winners, each gets 4% (20% total)
+              </li>
+              <li>
+                <b>Curious Coins</b>: 10 winners, each gets 1.5% (15% total)
+              </li>
+              <li>
+                <b>Lucky Loot</b>: 32 winners, each gets 0.5% (16% total)
+              </li>
+              <li>10% of the pot always goes to the team</li>
+            </ul>
+            <p>
+              Remember, this is a game, and while there are rewards, there are
+              also risks involved. Play responsibly!
+            </p>
+          </div>
+        ),
+      },
+      {
         command: 'participate',
         result: (
           <div>
             <p>
-              [REDACTED] [REDACTED] [REDACTED] [REDACTED] [REDACTED] [REDACTED]
-              [REDACTED] [REDACTED] [REDACTED] [REDACTED] [REDACTED] [REDACTED]
-              [REDACTED] [REDACTED] [REDACTED]
+              You should see the popup to get a ticket with $SIMP. Make sure you
+              have enough $SIMP or transaction will fail!
+            </p>
+            <p>Remember, you can get as many tickets as you want.</p>
+            <p>
+              You will not see your tickets anywhere, and there's no next step
+              required, the great random will distribute the pot at the best
+              date and time in the future.
             </p>
           </div>
         ),
+        sideEffect: async () => {
+          if (!ready) {
+            toast.error("Looks like we're not ready yet!")
+            return
+          }
+          if (context) {
+            await connectAsync({ connector: farcasterFrame() })
+          } else {
+            if (!connectors[0]) {
+              toast.error(
+                'No connectors available. Please install a wallet or connector.'
+              )
+              return
+            }
+            if (!account.isConnected) {
+              await connectAsync({ connector: connectors[0] })
+            }
+          }
+          try {
+            await writeContractAsync({
+              address: contractAddress,
+              abi: simpAbi,
+              functionName: 'enterDraw',
+              args: [1n],
+            })
+            toast.success(
+              'Participation successful! You will not see tickets anywhere, but rest assured: you got it.'
+            )
+          } catch (error) {
+            console.error('Error participating:', error)
+            toast.error(
+              'An error occurred while trying to participate. Please check your wallet and try again.'
+            )
+          }
+        },
       },
       {
         command: 'buy',
@@ -203,7 +287,14 @@ export default function () {
         },
       },
     ],
-    [ready, context]
+    [
+      ready,
+      context,
+      connectAsync,
+      connectors,
+      account.isConnected,
+      writeContractAsync,
+    ]
   )
   return (
     <div className="flex h-screen w-screen p-2 bg-black break-words">
@@ -212,6 +303,7 @@ export default function () {
         userName={
           ready && context?.user.username ? context.user.username : 'anon'
         }
+        initialFeedEnding={<InitialFeedEnding />}
         machineName="simp"
         initialFeed={initialFeed}
       />
