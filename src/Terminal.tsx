@@ -7,14 +7,14 @@ import { useContext, useMemo } from 'preact/hooks'
 import toast from 'react-hot-toast'
 import simpAbi from 'simpAbi'
 import { Terminal } from 'TerminalComponent'
-import { erc20Abi, formatUnits } from 'viem'
+import { createPublicClient, erc20Abi, formatUnits, http } from 'viem'
 import { base } from 'viem/chains'
-import {
-  useAccount,
-  useConnect,
-  useReadContract,
-  useWriteContract,
-} from 'wagmi'
+import { useAccount, useConnect, useWriteContract } from 'wagmi'
+
+const publicClient = createPublicClient({
+  chain: base,
+  transport: http(),
+})
 
 const initialFeed = `Welcome to StupidInternetMoneyProtocol ($SIMP)! The larger the stake, the more it rewards. The future and the past of crypto: many play, fewer get much more! Available commands: help, info, airdrop, buy, rules, participate.`
 
@@ -23,16 +23,7 @@ export default function () {
   const account = useAccount()
   const { connectors, connectAsync } = useConnect()
   const { writeContractAsync } = useWriteContract()
-  const { data: balanceData } = useReadContract({
-    address: contractAddress,
-    abi: erc20Abi,
-    functionName: 'balanceOf',
-    args: [contractAddress],
-    chainId: base.id,
-    query: {
-      refetchInterval: 1000 * 10,
-    },
-  })
+
   const commands = useMemo(
     () => [
       {
@@ -260,9 +251,15 @@ export default function () {
             toast.success(
               'Participation successful! You will not see tickets anywhere, but rest assured: you got it.'
             )
+            const balanceData = await publicClient.readContract({
+              address: contractAddress,
+              abi: erc20Abi,
+              functionName: 'balanceOf',
+              args: [contractAddress],
+            })
             if (context) {
               await miniAppSdk.actions.composeCast({
-                text: `I just participated in the $SIMP! Let's see if I win! The pot is ${balanceData ? formatUnits(balanceData, 18) : 'A LOT OF'} $SIMP 🔥🔥🔥`,
+                text: `I just participated in the $SIMP! Let's see if I win! The pot is ${formatUnits(balanceData, 18)} $SIMP 🔥🔥🔥`,
                 close: false,
                 embeds: ['https://stupidinternetmoneyprotocol.com'],
               })
@@ -271,7 +268,7 @@ export default function () {
                 'https://stupidinternetmoneyprotocol.com'
               )
               const text = encodeURIComponent(
-                `I just participated in the $SIMP! Let's see if I win! The pot is ${balanceData ? formatUnits(balanceData, 18) : 'A LOT OF'} $SIMP 🔥🔥🔥`
+                `I just participated in the $SIMP! Let's see if I win! The pot is ${formatUnits(balanceData, 18)} $SIMP 🔥🔥🔥`
               )
               window.open(
                 `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
@@ -329,7 +326,6 @@ export default function () {
       connectors,
       account.isConnected,
       writeContractAsync,
-      balanceData,
     ]
   )
   return (
