@@ -278,7 +278,8 @@ export default function () {
           } catch (error) {
             console.error('Error participating:', error)
             toast.error(
-              'An error occurred while trying to participate. Please check your wallet and try again.'
+              'An error occurred while trying to participate. Please check your wallet and try again. ' +
+                (error instanceof Error ? error.message : `${error}`)
             )
           }
         },
