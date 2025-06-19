@@ -4,6 +4,10 @@ import { erc20Abi, formatUnits } from 'viem'
 import { useReadContract } from 'wagmi'
 import { base } from 'wagmi/chains'
 
+function formatNumber(n: string) {
+  return n.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+}
+
 export default function InitialFeedEnding() {
   const { data: balanceData } = useReadContract({
     address: contractAddress,
@@ -25,12 +29,16 @@ export default function InitialFeedEnding() {
     <div>
       <p>
         Current pot is{' '}
-        {balanceData !== undefined ? formatUnits(balanceData, 18) : '~~~'}{' '}
+        {balanceData !== undefined
+          ? formatNumber(formatUnits(balanceData, 18))
+          : '~~~'}{' '}
         $SIMP.
       </p>
       <p>
         Entry cost is{' '}
-        {entryData !== undefined ? formatUnits(entryData as bigint, 18) : '~~~'}{' '}
+        {entryData !== undefined
+          ? formatNumber(formatUnits(entryData as bigint, 18))
+          : '~~~'}{' '}
         $SIMP
       </p>
     </div>
