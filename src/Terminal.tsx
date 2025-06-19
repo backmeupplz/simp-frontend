@@ -260,11 +260,24 @@ export default function () {
             toast.success(
               'Participation successful! You will not see tickets anywhere, but rest assured: you got it.'
             )
-            await miniAppSdk.actions.composeCast({
-              text: `I just participated in the $SIMP! Let's see if I win! The pot is ${balanceData ? formatUnits(balanceData, 18) : 'A LOT OF'} $SIMP 🔥🔥🔥`,
-              close: false,
-              embeds: ['https://stupidinternetmoneyprotocol.com'],
-            })
+            if (context) {
+              await miniAppSdk.actions.composeCast({
+                text: `I just participated in the $SIMP! Let's see if I win! The pot is ${balanceData ? formatUnits(balanceData, 18) : 'A LOT OF'} $SIMP 🔥🔥🔥`,
+                close: false,
+                embeds: ['https://stupidinternetmoneyprotocol.com'],
+              })
+            } else {
+              const url = encodeURIComponent(
+                'https://stupidinternetmoneyprotocol.com'
+              )
+              const text = encodeURIComponent(
+                `I just participated in the $SIMP! Let's see if I win! The pot is ${balanceData ? formatUnits(balanceData, 18) : 'A LOT OF'} $SIMP 🔥🔥🔥`
+              )
+              window.open(
+                `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+                '_blank'
+              )
+            }
           } catch (error) {
             console.error('Error participating:', error)
             toast.error(
@@ -316,6 +329,7 @@ export default function () {
       connectors,
       account.isConnected,
       writeContractAsync,
+      balanceData,
     ]
   )
   return (
