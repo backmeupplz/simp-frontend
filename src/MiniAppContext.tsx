@@ -22,6 +22,11 @@ export default function MiniAppContextProvider({
       setContext(context)
       await miniAppSdk.actions.ready()
       setReady(true)
+      if (context.user.fid) {
+        if (!context.client.added) {
+          return miniAppSdk.actions.addMiniApp()
+        }
+      }
     }
     void loadContext()
   }, [setReady, setContext])

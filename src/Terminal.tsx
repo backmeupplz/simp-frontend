@@ -74,12 +74,12 @@ export default function () {
                   target="_blank"
                   className="underline"
                   href={
-                    ready && !context
+                    ready && !context?.user.fid
                       ? 'https://dexscreener.com/base/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
                       : undefined
                   }
                   onClick={() => {
-                    if (ready && context) {
+                    if (ready && context?.user.fid) {
                       return miniAppSdk.actions.openUrl(
                         'https://dexscreener.com/base/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
                       )
@@ -93,12 +93,12 @@ export default function () {
                   target="_blank"
                   className="underline"
                   href={
-                    ready && !context
+                    ready && !context?.user.fid
                       ? 'https://basescan.org/address/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
                       : undefined
                   }
                   onClick={() => {
-                    if (ready && context) {
+                    if (ready && context?.user.fid) {
                       return miniAppSdk.actions.openUrl(
                         'https://basescan.org/address/0x568664cb237D2a730e9B8C11850Ec62B633C5C45'
                       )
@@ -112,12 +112,12 @@ export default function () {
                   target="_blank"
                   className="underline"
                   href={
-                    ready && !context
+                    ready && !context?.user.fid
                       ? 'https://farcaster.xyz/simpdotcom'
                       : undefined
                   }
                   onClick={() => {
-                    if (ready && context) {
+                    if (ready && context?.user.fid) {
                       return miniAppSdk.actions.openUrl(
                         'https://farcaster.xyz/simpdotcom'
                       )
@@ -131,12 +131,12 @@ export default function () {
                   target="_blank"
                   className="underline"
                   href={
-                    ready && !context
+                    ready && !context?.user.fid
                       ? 'https://x.com/sinternetmoneyp/'
                       : undefined
                   }
                   onClick={() => {
-                    if (ready && context) {
+                    if (ready && context?.user.fid) {
                       return miniAppSdk.actions.openUrl(
                         'https://x.com/sinternetmoneyp/'
                       )
@@ -228,7 +228,7 @@ export default function () {
             toast.error("Looks like we're not ready yet!")
             return
           }
-          if (context) {
+          if (context?.user.fid) {
             await connectAsync({ connector: farcasterFrame() })
           } else {
             if (!connectors[0]) {
@@ -257,7 +257,7 @@ export default function () {
               functionName: 'balanceOf',
               args: [contractAddress],
             })
-            if (context) {
+            if (context?.user.fid) {
               await miniAppSdk.actions.composeCast({
                 text: `I just participated in the $SIMP! Let's see if I win! The pot is ${formatUnits(balanceData, 18)} $SIMP 🔥🔥🔥`,
                 close: false,
@@ -286,7 +286,7 @@ export default function () {
       {
         command: 'buy',
         result:
-          ready && context ? (
+          ready && !!context?.user.fid ? (
             <div>
               <p>The swap UI should've opened!</p>
             </div>
@@ -306,16 +306,17 @@ export default function () {
             </div>
           ),
         sideEffect: () => {
-          if (ready && context) {
+          if (context?.user.fid) {
             return miniAppSdk.actions.swapToken({
               buyToken:
                 'eip155:8453/erc20:0x568664cb237D2a730e9B8C11850Ec62B633C5C45',
             })
+          } else {
+            window.open(
+              'https://app.uniswap.org/swap?outputCurrency=0x568664cb237D2a730e9B8C11850Ec62B633C5C45&chain=base',
+              '_blank'
+            )
           }
-          window.open(
-            'https://app.uniswap.org/swap?outputCurrency=0x568664cb237D2a730e9B8C11850Ec62B633C5C45&chain=base',
-            '_blank'
-          )
         },
       },
     ],
