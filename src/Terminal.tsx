@@ -233,7 +233,7 @@ export default function () {
           } else {
             if (!connectors[0]) {
               toast.error(
-                'No connectors available. Please install a wallet or connector.'
+                "Can't find a connected wallet! Try on desktop or inside a Farcaster mini app or a mobile wallet built-in browser."
               )
               return
             }
