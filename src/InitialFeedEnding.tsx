@@ -5,7 +5,7 @@ import { useReadContract } from 'wagmi'
 import { base } from 'wagmi/chains'
 
 function formatNumber(n: string) {
-  return n.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  return n.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
 export default function InitialFeedEnding() {

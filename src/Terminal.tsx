@@ -11,6 +11,10 @@ import { createPublicClient, erc20Abi, formatUnits, http } from 'viem'
 import { base } from 'viem/chains'
 import { useAccount, useConnect, useWriteContract } from 'wagmi'
 
+function formatNumber(n: string) {
+  return n.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
 const publicClient = createPublicClient({
   chain: base,
   transport: http(),
@@ -259,7 +263,7 @@ export default function () {
             })
             if (context?.user.fid) {
               await miniAppSdk.actions.composeCast({
-                text: `I just participated in the $SIMP! Let's see if I win! The pot is ${formatUnits(balanceData, 18)} $SIMP 🔥🔥🔥`,
+                text: `I just participated in the $SIMP! Let's see if I win! The pot is ${formatNumber(formatUnits(balanceData, 18))} $SIMP 🔥🔥🔥`,
                 close: false,
                 embeds: ['https://stupidinternetmoneyprotocol.com'],
               })
@@ -268,7 +272,7 @@ export default function () {
                 'https://stupidinternetmoneyprotocol.com'
               )
               const text = encodeURIComponent(
-                `I just participated in the $SIMP! Let's see if I win! The pot is ${formatUnits(balanceData, 18)} $SIMP 🔥🔥🔥`
+                `I just participated in the $SIMP! Let's see if I win! The pot is ${formatNumber(formatUnits(balanceData, 18))} $SIMP 🔥🔥🔥`
               )
               window.open(
                 `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
